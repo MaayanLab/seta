@@ -1,14 +1,14 @@
 import React from 'react';
 import Relay from 'react-relay';
 
-class App extends React.Component {
+class Landing extends React.Component {
   render() {
     return (
-      <div></div>
+      <h1>Landing</h1>
     );
   }
 }
 
-export default Relay.createContainer(App, {
+export default Relay.createContainer(Landing, {
   fragments: {},
 });

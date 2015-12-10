@@ -4,17 +4,9 @@ export default function (sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: (models) => {
-        User.hasMany(models.Dataset, {
-          foreignKey: 'creator_id',
-          as: 'Datasets',
-        });
-        User.hasMany(models.Figure, {
-          foreignKey: 'creator_id',
-          as: 'Figures',
-        });
+        User.belongsTo(models.Group);
       },
     },
   });
-
   return User;
 }

@@ -5,7 +5,12 @@ export default function (sequelize, DataTypes) {
     classMethods: {
       associate: (models) => {
         Group.hasMany(models.User);
-        Group.hasMany(models.Datasets);
+        Group.hasMany(models.Code);
+        Group.hasMany(models.Figure);
+        Group.hasMany(models.Dataset);
+        Group.hasMany(models.AnalysisTool);
+        Group.hasMany(models.ProcessedData);
+        Group.hasMany(models.Documentation);
       },
     },
   });

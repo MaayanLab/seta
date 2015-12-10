@@ -5,6 +5,7 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import { Schema } from './data/schema';
 import webpackConfig from '../webpack.config';
+import models from './data/models';
 
 const APP_PORT = 3000;
 const GRAPHQL_PORT = 8080;
@@ -39,7 +40,9 @@ const app = new WebpackDevServer(compiler, {
   },
 });
 // Serve static resources
-app.use('/', express.static(path.resolve(__dirname, 'public')));
-app.listen(APP_PORT, () => {
+app.use('/', express.static(path.resolve(__dirname, '..', 'src', 'public')));
+
+models.sequelize.sync().then(() => {
+  app.listen(APP_PORT);
   console.log(`App is now running on http://localhost:${APP_PORT}`); // eslint-disable-line
 });

@@ -5,11 +5,13 @@ export default function (sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: (models) => {
+        Dataset.hasMany(models.Code);
         Dataset.hasMany(models.Figure);
-        Dataset.belongsTo(models.User, {
-          foreignKey: 'creator_id',
-          as: 'creator',
-        });
+        Dataset.hasMany(models.AnalysisTool);
+        Dataset.hasMany(models.Documentation);
+        Dataset.hasMany(models.ProcessedData);
+        Dataset.belongsTo(models.Group);
+        Dataset.belongsTo(models.Category);
       },
     },
   });

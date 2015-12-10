@@ -1,5 +1,4 @@
-import { createHashHistory, useBaseName } from 'react-router';
-
-export default useBaseName(createHashHistory)({
+import { createHashHistory, useBasename } from 'history';
+export default useBasename(createHashHistory)({
   basename: '/seta',
 });
