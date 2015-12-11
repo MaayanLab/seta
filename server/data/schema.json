@@ -4,9 +4,7 @@
       "queryType": {
         "name": "Query"
       },
-      "mutationType": {
-        "name": "Mutation"
-      },
+      "mutationType": null,
       "subscriptionType": null,
       "types": [
         {
@@ -42,12 +40,142 @@
               "deprecationReason": null
             },
             {
-              "name": "game",
+              "name": "user",
               "description": null,
-              "args": [],
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "email",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
               "type": {
                 "kind": "OBJECT",
-                "name": "Game",
+                "name": "User",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "group",
+              "description": null,
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "name",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Group",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "category",
+              "description": null,
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "name",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Category",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "dataset",
+              "description": null,
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "title",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "description",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Dataset",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -97,20 +225,30 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "Game",
+              "name": "User",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "HidingSpot",
+              "name": "Group",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Dataset",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Category",
               "ofType": null
             }
           ]
         },
         {
           "kind": "OBJECT",
-          "name": "Game",
-          "description": "A treasure search game",
+          "name": "User",
+          "description": null,
           "fields": [
             {
               "name": "id",
@@ -129,8 +267,201 @@
               "deprecationReason": null
             },
             {
-              "name": "hidingSpots",
-              "description": "Places where treasure might be hidden",
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "email",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "Node",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "SCALAR",
+          "name": "String",
+          "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Group",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "The ID of an object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "Node",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Dataset",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "The ID of an object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "title",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "description",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "Node",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Category",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "The ID of an object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "email",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "datasets",
+              "description": "The datasets within a given category",
               "args": [
                 {
                   "name": "after",
@@ -175,19 +506,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "HidingSpotConnection",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "turnsRemaining",
-              "description": "The number of turns a player has left to find the treasure",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "Int",
+                "name": "DatasetConnection",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -207,16 +526,6 @@
         },
         {
           "kind": "SCALAR",
-          "name": "String",
-          "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
-          "fields": null,
-          "inputFields": null,
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "SCALAR",
           "name": "Int",
           "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^53 - 1) and 2^53 - 1 since represented in JSON as double-precision floating point numbers specifiedby [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point).",
           "fields": null,
@@ -227,7 +536,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "HidingSpotConnection",
+          "name": "DatasetConnection",
           "description": "A connection to a list of items.",
           "fields": [
             {
@@ -255,7 +564,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "HidingSpotEdge",
+                  "name": "DatasetEdge",
                   "ofType": null
                 }
               },
@@ -347,7 +656,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "HidingSpotEdge",
+          "name": "DatasetEdge",
           "description": "An edge in a connection.",
           "fields": [
             {
@@ -356,7 +665,7 @@
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "HidingSpot",
+                "name": "Dataset",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -365,191 +674,6 @@
             {
               "name": "cursor",
               "description": "A cursor for use in pagination",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "OBJECT",
-          "name": "HidingSpot",
-          "description": "A place where you might find treasure",
-          "fields": [
-            {
-              "name": "id",
-              "description": "The ID of an object",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "hasBeenChecked",
-              "description": "True if this spot has already been checked for treasure",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "hasTreasure",
-              "description": "True if this hiding spot holds treasure",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "Node",
-              "ofType": null
-            }
-          ],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "OBJECT",
-          "name": "Mutation",
-          "description": null,
-          "fields": [
-            {
-              "name": "checkHidingSpotForTreasure",
-              "description": null,
-              "args": [
-                {
-                  "name": "input",
-                  "description": null,
-                  "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "CheckHidingSpotForTreasureInput",
-                      "ofType": null
-                    }
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "OBJECT",
-                "name": "CheckHidingSpotForTreasurePayload",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "INPUT_OBJECT",
-          "name": "CheckHidingSpotForTreasureInput",
-          "description": null,
-          "fields": null,
-          "inputFields": [
-            {
-              "name": "id",
-              "description": null,
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "clientMutationId",
-              "description": null,
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            }
-          ],
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "OBJECT",
-          "name": "CheckHidingSpotForTreasurePayload",
-          "description": null,
-          "fields": [
-            {
-              "name": "hidingSpot",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "OBJECT",
-                "name": "HidingSpot",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "game",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "OBJECT",
-                "name": "Game",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "clientMutationId",
-              "description": null,
               "args": [],
               "type": {
                 "kind": "NON_NULL",

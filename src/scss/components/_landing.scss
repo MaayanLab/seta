@@ -1,0 +1,63 @@
+.banner {
+  background-color: $brand-primary;
+  color: $light-gray;
+  height: 200px;
+  padding: 30px 0;
+
+  h1 {
+    margin: 0;
+    text-align: center;
+  }
+}
+
+$search-width: 500px;
+
+.search-wrap {
+  max-width: $search-width;
+  margin: 20px auto;
+}
+
+.search-outer {
+  height: 38px;
+  border: 1px solid;
+  max-width: $search-width;
+  border-color: $gray-border;
+
+  &:hover {
+    border-color: $v-dark-gray;
+    border-top: 1px solid $v-dark-gray-border;
+  }
+
+
+  &:active,
+  &:focus,
+  &:visited {
+    border-color: $brand-secondary;
+  }
+}
+
+.search-inner {
+  height: 100%;
+  overflow: hidden;
+  padding: 6px 9px 0;
+
+}
+
+.input-wrap {
+  position: relative;
+
+  input {
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    height: auto;
+    width: 100%;
+    position: absolute;
+    z-index: 6;
+    left: 0px;
+    outline: none;
+    font-size: 16px;
+    line-height: 26px !important;
+    height: 26px !important;
+  }
+}

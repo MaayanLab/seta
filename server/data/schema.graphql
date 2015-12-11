@@ -1,38 +1,29 @@
-input CheckHidingSpotForTreasureInput {
+type Category implements Node {
   id: ID!
-  clientMutationId: String!
+  name: String
+  email: String
+  datasets(after: String, first: Int, before: String, last: Int): DatasetConnection
 }
 
-type CheckHidingSpotForTreasurePayload {
-  hidingSpot: HidingSpot
-  game: Game
-  clientMutationId: String!
-}
-
-type Game implements Node {
+type Dataset implements Node {
   id: ID!
-  hidingSpots(after: String, first: Int, before: String, last: Int): HidingSpotConnection
-  turnsRemaining: Int
+  title: String
+  description: String
 }
 
-type HidingSpot implements Node {
-  id: ID!
-  hasBeenChecked: Boolean
-  hasTreasure: Boolean
-}
-
-type HidingSpotConnection {
+type DatasetConnection {
   pageInfo: PageInfo!
-  edges: [HidingSpotEdge]
+  edges: [DatasetEdge]
 }
 
-type HidingSpotEdge {
-  node: HidingSpot
+type DatasetEdge {
+  node: Dataset
   cursor: String!
 }
 
-type Mutation {
-  checkHidingSpotForTreasure(input: CheckHidingSpotForTreasureInput!): CheckHidingSpotForTreasurePayload
+type Group implements Node {
+  id: ID!
+  name: String
 }
 
 interface Node {
@@ -48,5 +39,14 @@ type PageInfo {
 
 type Query {
   node(id: ID!): Node
-  game: Game
+  user(id: Int, email: String): User
+  group(id: Int, name: String): Group
+  category(id: Int, name: String): Category
+  dataset(id: Int, title: String, description: String): Dataset
+}
+
+type User implements Node {
+  id: ID!
+  name: String
+  email: String
 }

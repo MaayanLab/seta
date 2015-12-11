@@ -5,13 +5,34 @@ export default function (sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: (models) => {
-        Dataset.hasMany(models.Code);
-        Dataset.hasMany(models.Figure);
-        Dataset.hasMany(models.AnalysisTool);
-        Dataset.hasMany(models.Documentation);
-        Dataset.hasMany(models.ProcessedData);
-        Dataset.belongsTo(models.Group);
-        Dataset.belongsTo(models.Category);
+        Dataset.hasMany(models.Script, {
+          as: 'scripts',
+          foreignKey: 'datasetId',
+        });
+        Dataset.hasMany(models.Figure, {
+          as: 'figures',
+          foreignKey: 'datasetId',
+        });
+        Dataset.hasMany(models.AnalysisTool, {
+          as: 'analysisTools',
+          foreignKey: 'datasetId',
+        });
+        Dataset.hasMany(models.Documentation, {
+          as: 'docs',
+          foreignKey: 'datasetId',
+        });
+        Dataset.hasMany(models.ProcessedData, {
+          as: 'processedData',
+          foreignKey: 'datasetId',
+        });
+        Dataset.Group = Dataset.belongsTo(models.Group, {
+          as: 'group',
+          foreignKey: 'groupId',
+        });
+        Dataset.Category = Dataset.belongsTo(models.Category, {
+          as: 'category',
+          foreignKey: 'categoryId',
+        });
       },
     },
   });

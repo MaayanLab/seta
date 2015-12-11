@@ -5,8 +5,14 @@ export default function (sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: (models) => {
-        Documentation.belongsTo(models.Group);
-        Documentation.belongsTo(models.Dataset);
+        Documentation.belongsTo(models.Group, {
+          as: 'group',
+          foreignKey: 'groupId',
+        });
+        Documentation.belongsTo(models.Dataset, {
+          as: 'dataset',
+          foreignKey: 'datasetId',
+        });
       },
     },
   });

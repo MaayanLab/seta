@@ -2,7 +2,9 @@ var path = require('path');
 var _ = require('lodash');
 var webpack = require('webpack');
 
-const DEBUG = !process.argv.includes('--release')
+var DEBUG = !process.argv.includes('--release');
+// var VERBOSE = !process.argv.includes('--verbose');
+var VERBOSE = true;
 
 var appConfig = {
   entry: path.resolve(__dirname, 'src', 'js', 'app.js'),
@@ -12,18 +14,19 @@ var appConfig = {
   stats: {
     colors: true,
     reasons: DEBUG,
-    hash: false,
-    version: false,
+    hash: VERBOSE,
+    version: VERBOSE,
     timings: true,
-    chunks: false,
-    chunkModules: false,
-    cached: false,
-    cachedAssets: false,
+    chunks: VERBOSE,
+    chunkModules: VERBOSE,
+    cached: VERBOSE,
+    cachedAssets: VERBOSE,
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
   ],
   resolve: {
+    modulesDirectories: ['node_modules'],
     extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.json'],
   },
   eslint: {
@@ -68,7 +71,7 @@ if (!DEBUG) {
   var prodPlugins = [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
+      compress: { warnings: VERBOSE }
     }),
     new webpack.optimize.AggressiveMergingPlugin()
   ];

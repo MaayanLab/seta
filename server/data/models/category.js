@@ -1,10 +1,13 @@
 export default function (sequelize, DataTypes) {
   const Category = sequelize.define('Category', {
-    name: DataTypes.STRING,
+    name: { type: DataTypes.STRING, unique: true },
   }, {
     classMethods: {
       associate: (models) => {
-        Category.hasMany(models.Dataset);
+        Category.hasMany(models.Dataset, {
+          as: 'datasets',
+          foreignKey: 'categoryId',
+        });
       },
     },
   });

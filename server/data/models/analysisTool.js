@@ -5,8 +5,14 @@ export default function (sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: (models) => {
-        AnalysisTool.belongsTo(models.Group);
-        AnalysisTool.belongsTo(models.Dataset);
+        AnalysisTool.belongsTo(models.Group, {
+          as: 'group',
+          foreignKey: 'groupId',
+        });
+        AnalysisTool.belongsTo(models.Dataset, {
+          as: 'dataset',
+          foreignKey: 'datasetId',
+        });
       },
     },
   });

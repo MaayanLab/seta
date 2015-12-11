@@ -2,10 +2,10 @@
   "ecmaVersion": 6,
   "libs": [],
   "loadEagerly": [
-    "src/**/*.js"
+    "src/**/*.js",
+    "server/**/*.js"
   ],
   "plugins": {
-    "modules": {},
     "node": {}
   }
 }

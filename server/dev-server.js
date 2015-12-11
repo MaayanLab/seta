@@ -23,6 +23,7 @@ graphQLServer.listen(GRAPHQL_PORT, () => console.log( // eslint-disable-line
 
 // Serve the Relay app
 const compiler = webpack(webpackConfig);
+const VERBOSE = false;
 const app = new WebpackDevServer(compiler, {
   contentBase: '/public/',
   proxy: { '/graphql': `http://localhost:${GRAPHQL_PORT}` },
@@ -30,13 +31,13 @@ const app = new WebpackDevServer(compiler, {
   quiet: false,
   noInfo: false,
   stats: {
-    assets: false,
+    assets: VERBOSE,
     colors: true,
-    version: false,
-    hash: false,
-    timings: false,
-    chunks: false,
-    chunkModules: false,
+    version: VERBOSE,
+    hash: VERBOSE,
+    timings: VERBOSE,
+    chunks: VERBOSE,
+    chunkModules: VERBOSE,
   },
 });
 // Serve static resources
@@ -45,4 +46,6 @@ app.use('/', express.static(path.resolve(__dirname, '..', 'src', 'public')));
 models.sequelize.sync().then(() => {
   app.listen(APP_PORT);
   console.log(`App is now running on http://localhost:${APP_PORT}`); // eslint-disable-line
+  // require('../scripts/updateSchema');
+  // require('./runQueries')(models);
 });
