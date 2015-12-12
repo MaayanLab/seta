@@ -46,6 +46,5 @@ app.use('/', express.static(path.resolve(__dirname, '..', 'src', 'public')));
 models.sequelize.sync().then(() => {
   app.listen(APP_PORT);
   console.log(`App is now running on http://localhost:${APP_PORT}`); // eslint-disable-line
-  // require('../scripts/updateSchema');
-  // require('./runQueries')(models);
+  require('./runQueries')(models);
 });

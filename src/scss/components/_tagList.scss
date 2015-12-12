@@ -1,0 +1,24 @@
+.tag-list {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.tag {
+  display: inline;
+  text-transform: uppercase;
+
+  a {
+    color: #2196f3;
+    background: transparent;
+    border: 2px solid #ddd;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 13px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 0 1px 10px 1px;
+  }
+}

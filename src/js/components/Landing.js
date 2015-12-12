@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Relay from 'react-relay';
 import SearchBar from './SearchBar';
+import TagList from './TagList';
 
-class Landing extends React.Component {
+class Landing extends Component {
+  static propTypes = {
+    viewer: PropTypes.object,
+  }
   render() {
     return (
       <div className="landing-content">
@@ -12,11 +16,17 @@ class Landing extends React.Component {
         <div className="search-wrap">
           <SearchBar />
         </div>
+        <TagList viewer={this.props.viewer} />
       </div>
     );
   }
 }
 
 export default Relay.createContainer(Landing, {
-  fragments: {},
+  fragments: {
+    viewer: () => Relay.QL`
+      fragment on Viewer {
+        ${TagList.getFragment('viewer')}
+      }`,
+  },
 });

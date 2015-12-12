@@ -1,4 +1,9 @@
 export default function runQueries(db) {
+  db.Category.create({
+    tag: 'atac-seq',
+    name: 'ATAC-Seq',
+    description: 'Hello world, check out ATAC-Seq',
+  });
   db.Dataset.create({
     title: 'Global Chromatin Profiling Epigenetic Profiling Assay',
     description: 'GCP',
@@ -6,7 +11,9 @@ export default function runQueries(db) {
       name: 'Broad LINCS Proteomic Characterization Center for Signaling and Epigenetics',
     },
     category: {
+      tag: 'mass_spectrometry',
       name: 'Mass Spectrometry',
+      description: 'Some people call this mass spec. You can call it whatever you\'d like.',
     },
   }, {
     include: [

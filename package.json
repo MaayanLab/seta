@@ -5,7 +5,8 @@
   "repository": "",
   "version": "0.1.0",
   "scripts": {
-    "start": "babel-node ./server/dev-server.js",
+    "start": "babel-node ./server/server.js",
+    "start:dev": "npm run update-schema && babel-node ./server/dev-server.js",
     "update-schema": "babel-node ./scripts/updateSchema.js"
   },
   "dependencies": {

@@ -1,9 +1,6 @@
 import {
-  // GraphQLBoolean,
-  // GraphQLID,
   GraphQLInt,
   // GraphQLList,
-  // GraphQLNonNull,
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLString,
@@ -13,12 +10,7 @@ import {
   connectionArgs,
   connectionDefinitions,
   connectionFromPromisedArray,
-  // cursorForObjectInConnection,
-  // fromGlobalId,
   globalIdField,
-  // mutationWithClientMutationId,
-  // nodeDefinitions,
-  // toGlobalId,
 } from 'graphql-relay';
 
 import { relay, resolver } from 'graphql-sequelize';
@@ -39,31 +31,6 @@ const {
   nodeField,
   nodeTypeMapper,
 } = sequelizeNodeInterface(db.sequelize);
-
-const userType = new GraphQLObjectType({
-  name: User.name,
-  fields: {
-    id: globalIdField(User.name),
-    name: {
-      type: GraphQLString,
-    },
-    email: {
-      type: GraphQLString,
-    },
-  },
-  interfaces: [nodeInterface],
-});
-
-const groupType = new GraphQLObjectType({
-  name: Group.name,
-  fields: {
-    id: globalIdField(Group.name),
-    name: {
-      type: GraphQLString,
-    },
-  },
-  interfaces: [nodeInterface],
-});
 
 const datasetType = new GraphQLObjectType({
   name: Dataset.name,
@@ -89,7 +56,7 @@ const categoryType = new GraphQLObjectType({
     name: {
       type: GraphQLString,
     },
-    email: {
+    description: {
       type: GraphQLString,
     },
     datasets: {
@@ -107,29 +74,55 @@ const categoryType = new GraphQLObjectType({
   interfaces: [nodeInterface],
 });
 
+const { connectionType: categoryConnection } =
+  connectionDefinitions({ name: Category.name, nodeType: categoryType });
+
+const viewerType = new GraphQLObjectType({
+  name: 'Viewer',
+  fields: {
+    id: globalIdField('Viewer'),
+    name: {
+      type: GraphQLString,
+    },
+    email: {
+      type: GraphQLString,
+    },
+    categories: {
+      type: categoryConnection,
+      args: connectionArgs,
+      resolve: (category, args) => {
+        return connectionFromPromisedArray(
+          findAllCategories(),
+          args
+        );
+      },
+    },
+  },
+  interfaces: [nodeInterface],
+});
+
+const groupType = new GraphQLObjectType({
+  name: Group.name,
+  fields: {
+    id: globalIdField(Group.name),
+    name: {
+      type: GraphQLString,
+    },
+  },
+  interfaces: [nodeInterface],
+});
+
 nodeTypeMapper.mapTypes({
-  [User.name]: userType,
-  [Group.name]: groupType,
   [Dataset.name]: datasetType,
   [Category.name]: categoryType,
+  'Viewer': viewerType,
+  [Group.name]: groupType,
 });
 
 const queryType = new GraphQLObjectType({
   name: 'Query',
   fields: () => ({
     node: nodeField,
-    user: {
-      type: userType,
-      args: {
-        id: {
-          type: GraphQLInt,
-        },
-        email: {
-          type: GraphQLString,
-        },
-      },
-      resolve: resolver(User),
-    },
     group: {
       type: groupType,
       args: {
@@ -152,7 +145,19 @@ const queryType = new GraphQLObjectType({
           type: GraphQLString,
         },
       },
-      resolve: (root, { id, name }) => findAllCategories({ id, name }),
+      resolve: resolver(Category),
+    },
+    viewer: {
+      type: viewerType,
+      args: {
+        id: {
+          type: GraphQLInt,
+        },
+        email: {
+          type: GraphQLString,
+        },
+      },
+      resolve: () => resolver(User),
     },
     dataset: {
       type: datasetType,

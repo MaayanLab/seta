@@ -12,10 +12,22 @@ export function getCategoryById(id) {
   });
 }
 
-export function findOneCategory(queryObj, includeAll, attributesArr) {
-  const query = {
-    where: queryObj,
-  };
+export function findOneCategory({ id, name }, includeAll = true, attributesArr) {
+  // Create whereObj = qArgs without falsey key-value pairs
+  const qArgs = arguments[0];
+  const whereObj = {};
+  for (const key in qArgs) {
+    // If key exists and its value is not falsey, add it to whereObj
+    if (qArgs.hasOwnProperty(key) && qArgs[key]) {
+      whereObj[key] = qArgs[key];
+    }
+  }
+  const query = {};
+  // Only add whereObj to query if it has any key-value pairs
+  if (Object.keys(whereObj).length > 0) {
+    query.where = whereObj;
+  }
+  // If includeAll is true, include all parts of category i.e. dataset information
   if (isBoolean(includeAll) && includeAll) {
     query.include = [{ all: true }];
   }
@@ -25,25 +37,18 @@ export function findOneCategory(queryObj, includeAll, attributesArr) {
   return new Promise((resolve) => {
     Category
       .findOne(query)
-      .then((category) => {
-        resolve(category);
+      .then((catInstance) => {
+        resolve(catInstance.get());
       });
   });
 }
 
-export function findAllCategories({ id, name }, includeAll, attributesArr, limit) {
-  // Remove falsey values from whereObj. id or name might not exist
-  const whereObj = arguments[0];
-  for (const key in whereObj) {
-    if (whereObj.hasOwnProperty(key) && !whereObj[key]) {
-      delete whereObj[key];
-    }
-  }
-  const lim = limit || 10;
+export function findAllCategories(includeAll = true, attributesArr, limit) {
+  const lim = limit || 30;
   const query = {
-    where: whereObj,
     limit: lim,
   };
+  // If includeAll is true, include all parts of category i.e. dataset information
   if (isBoolean(includeAll) && includeAll) {
     query.include = [{ all: true }];
   }
@@ -52,9 +57,9 @@ export function findAllCategories({ id, name }, includeAll, attributesArr, limit
   }
   return new Promise((resolve) => {
     Category
-      .find(query)
-      .then((category) => {
-        resolve(category);
+      .findAll(query)
+      .then((catInstances) => {
+        resolve(catInstances.map((instance) => instance.get()));
       });
   });
 }

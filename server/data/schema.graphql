@@ -1,8 +1,19 @@
 type Category implements Node {
   id: ID!
+  tag: String
   name: String
-  email: String
+  description: String
   datasets(after: String, first: Int, before: String, last: Int): DatasetConnection
+}
+
+type CategoryConnection {
+  pageInfo: PageInfo!
+  edges: [CategoryEdge]
+}
+
+type CategoryEdge {
+  node: Category
+  cursor: String!
 }
 
 type Dataset implements Node {
@@ -39,14 +50,15 @@ type PageInfo {
 
 type Query {
   node(id: ID!): Node
-  user(id: Int, email: String): User
   group(id: Int, name: String): Group
-  category(id: Int, name: String): Category
+  category(id: Int, tag: String, name: String): Category
+  viewer(id: Int, email: String): Viewer
   dataset(id: Int, title: String, description: String): Dataset
 }
 
-type User implements Node {
+type Viewer implements Node {
   id: ID!
   name: String
   email: String
+  categories(after: String, first: Int, before: String, last: Int): CategoryConnection
 }

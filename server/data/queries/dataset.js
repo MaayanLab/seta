@@ -59,7 +59,7 @@ export function findAllDatasets(queryObj, includeAll, attributesArr, limit) {
   }
   return new Promise((resolve) => {
     Dataset
-      .find(query)
+      .findAll(query)
       .then((dataset) => {
         resolve(dataset);
       });
@@ -81,7 +81,7 @@ export function findDatasetsByCategory(categoryId, includeAll, attributesArr) {
   }
   return new Promise((resolve) => {
     Dataset
-      .find(query)
+      .findAll(query)
       .then((datasets) => {
         if (!isArray(datasets)) {
           resolve([datasets]);
